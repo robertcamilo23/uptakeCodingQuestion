@@ -1,7 +1,7 @@
 package UptakeCodingQuestion.dao;
 
 import UptakeCodingQuestion.domain.Family;
-import UptakeCodingQuestion.interfaces.DAOInterface;
+import UptakeCodingQuestion.interfaces.FamilyDAOInterface;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * Robert Martinez - robertcamilo23@gmail.com
  */
-public class FamilyDAO extends SessionManager implements DAOInterface< Family, Integer >
+public class FamilyDAO extends SessionManager implements FamilyDAOInterface< Family, Integer >
 {
     public void persist( Family family )
     {

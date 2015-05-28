@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * FamilyDAO.java
+ * FamilyDAOInterface.java
  *
  * @author:
  *
  * Robert Martinez - robertcamilo23@gmail.com
  */
-public interface DAOInterface< T, Id extends Serializable >
+public interface FamilyDAOInterface< T, Id extends Serializable >
 {
     public void persist( T entity );
 

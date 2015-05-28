@@ -16,7 +16,7 @@ public class Family
     // ----------------------------
 
     private Integer id;
-    private List< People > people;
+    private List< Person > people;
 
     // ----------------------------
     // Getters & Setters
@@ -32,12 +32,12 @@ public class Family
         this.id = id;
     }
 
-    public List< People > getPeople( )
+    public List< Person > getPeople( )
     {
         return people;
     }
 
-    public void setPeople( List< People > people )
+    public void setPeople( List< Person > people )
     {
         this.people = people;
     }

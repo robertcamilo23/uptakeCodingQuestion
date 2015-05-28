@@ -15,6 +15,6 @@
         </property>
     </bean>
 
-    <bean id="people" class="UptakeCodingQuestion.domain.People" scope="prototype"/>
+    <bean id="person" class="UptakeCodingQuestion.domain.Person" scope="prototype"/>
 
 </beans>

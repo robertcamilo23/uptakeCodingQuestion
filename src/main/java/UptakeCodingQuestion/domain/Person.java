@@ -3,13 +3,13 @@ package UptakeCodingQuestion.domain;
 import java.util.Date;
 
 /**
- * People.java
+ * Person.java
  *
  * @author:
  *
  * Robert Martinez - robertcamilo23@gmail.com
  */
-public class People
+public class Person
 {
 
     // ----------------------------
@@ -75,5 +75,4 @@ public class People
     {
         this.genre = genre;
     }
-
 }
