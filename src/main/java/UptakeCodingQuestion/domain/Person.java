@@ -1,5 +1,9 @@
 package UptakeCodingQuestion.domain;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
 /**
@@ -9,13 +13,16 @@ import java.util.Date;
  *
  * Robert Martinez - robertcamilo23@gmail.com
  */
+@XmlRootElement( name = "Person" )
+@XmlAccessorType( XmlAccessType.FIELD )
+@XmlType( name = "" )
 public class Person
 {
 
     // ----------------------------
     // Attributes
     // ----------------------------
-    
+
     private Integer id;
     private String firstName;
     private String lastName;

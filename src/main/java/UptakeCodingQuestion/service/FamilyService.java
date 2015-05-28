@@ -6,6 +6,11 @@ import UptakeCodingQuestion.domain.Family;
 import UptakeCodingQuestion.domain.Person;
 import UptakeCodingQuestion.interfaces.FamilyCRUDInterface;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
 /**
  * FamilyService.java
  *
@@ -13,6 +18,7 @@ import UptakeCodingQuestion.interfaces.FamilyCRUDInterface;
  *
  * Robert Martinez - robertcamilo23@gmail.com
  */
+@Path( "/familyService/" )
 public class FamilyService implements FamilyCRUDInterface
 {
     // DAOs
@@ -27,7 +33,10 @@ public class FamilyService implements FamilyCRUDInterface
         familyDAO.closeCurrentSessionWithTransaction( );
     }
 
-    public Family readFamily( Integer familyId )
+    @GET
+    @Produces( { "application/xml", "application/json" } )
+    @Path( "/families/{familyId}" )
+    public Family readFamily( @PathParam( "familyId" ) Integer familyId )
     {
         familyDAO.openCurrentSession( );
         Family family = familyDAO.findById( familyId );
@@ -62,7 +71,10 @@ public class FamilyService implements FamilyCRUDInterface
         personDAO.closeCurrentSessionWithTransaction( );
     }
 
-    public Person readPerson( Integer personId )
+    @GET
+    @Produces( { "application/xml", "application/json" } )
+    @Path( "/people/{personId}" )
+    public Person readPerson( @PathParam( "personId" ) Integer personId )
     {
         personDAO.openCurrentSession( );
         Person person = personDAO.findById( personId );
@@ -70,7 +82,6 @@ public class FamilyService implements FamilyCRUDInterface
         return person;
     }
 
-    @Override
     public void updatePerson( Person person )
     {
         personDAO.openCurrentSessionWithTransaction( );

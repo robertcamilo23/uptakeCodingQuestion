@@ -1,5 +1,9 @@
 package UptakeCodingQuestion.domain;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
@@ -9,6 +13,9 @@ import java.util.List;
  *
  * Robert Martinez - robertcamilo23@gmail.com
  */
+@XmlRootElement( name = "Family" )
+@XmlAccessorType( XmlAccessType.FIELD )
+@XmlType( name = "" )
 public class Family
 {
     // ----------------------------

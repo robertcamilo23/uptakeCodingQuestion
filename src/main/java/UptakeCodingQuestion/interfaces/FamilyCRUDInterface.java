@@ -3,6 +3,8 @@ package UptakeCodingQuestion.interfaces;
 import UptakeCodingQuestion.domain.Family;
 import UptakeCodingQuestion.domain.Person;
 
+import javax.jws.WebService;
+
 /**
  * FamilyCRUDInterface.java
  *
@@ -10,6 +12,7 @@ import UptakeCodingQuestion.domain.Person;
  *
  * Robert Martinez - robertcamilo23@gmail.com
  */
+@WebService
 public interface FamilyCRUDInterface
 {
     // Families table
