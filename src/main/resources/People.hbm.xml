@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="UptakeCodingQuestion.domain">
+    <class name="People" table="People">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="firstName" type="java.lang.String" column="first_name"/>
+        <property name="lastName" type="java.lang.String" column="last_name"/>
+        <property name="birthday" type="timestamp" column="birthday"/>
+        <property name="genre" type="java.lang.Boolean" column="genre"/>
+    </class>
+</hibernate-mapping>
