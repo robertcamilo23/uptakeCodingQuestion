@@ -11,11 +11,20 @@ import java.util.Date;
  */
 public class People
 {
+
+    // ----------------------------
+    // Attributes
+    // ----------------------------
+    
     private Integer id;
     private String firstName;
     private String lastName;
     private Date birthday;
     private Boolean genre;
+
+    // ----------------------------
+    // Getters & Setters
+    // ----------------------------
 
     public Integer getId( )
     {
@@ -66,4 +75,5 @@ public class People
     {
         this.genre = genre;
     }
+
 }
