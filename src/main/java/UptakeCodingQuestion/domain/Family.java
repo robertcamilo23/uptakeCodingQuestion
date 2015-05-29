@@ -10,45 +10,53 @@ import java.util.List;
 
 /**
  * Family.java
- *
- * @author:
- *
- * Robert Martinez - robertcamilo23@gmail.com
+ * 
+ * @author: Robert Martinez - robertcamilo23@gmail.com
  */
-@XmlRootElement( name = "Family" )
-@XmlAccessorType( XmlAccessType.FIELD )
-@XmlType( name = "" )
+@XmlRootElement ( name = "Family" )
+@XmlAccessorType ( XmlAccessType.FIELD )
+@XmlType ( name = "" )
 @Entity
 public class Family
 {
-    // ----------------------------
-    // Attributes
-    // ----------------------------
+	// ----------------------------
+	// Constructor
+	// ----------------------------
 
-    private Integer id;
-    private List< Person > people;
+	public Family( )
+	{
+		super( );
+		// TODO Auto-generated constructor stub
+	}
 
-    // ----------------------------
-    // Getters & Setters
-    // ----------------------------
-    
-    public Integer getId( )
-    {
-        return id;
-    }
+	// ----------------------------
+	// Attributes
+	// ----------------------------
 
-    public void setId( Integer id )
-    {
-        this.id = id;
-    }
+	private Integer id;
+	private List< Person > people;
 
-    public List< Person > getPeople( )
-    {
-        return people;
-    }
+	// ----------------------------
+	// Getters & Setters
+	// ----------------------------
 
-    public void setPeople( List< Person > people )
-    {
-        this.people = people;
-    }
+	public Integer getId( )
+	{
+		return id;
+	}
+
+	public void setId( Integer id )
+	{
+		this.id = id;
+	}
+
+	public List< Person > getPeople( )
+	{
+		return people;
+	}
+
+	public void setPeople( List< Person > people )
+	{
+		this.people = people;
+	}
 }

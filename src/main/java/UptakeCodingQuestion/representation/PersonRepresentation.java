@@ -1,29 +1,17 @@
-package UptakeCodingQuestion.domain;
-
-import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-import java.util.Date;
+package UptakeCodingQuestion.representation;
 
 /**
- * Person.java
+ * PersonRepresentation.java
  * 
  * @author: Robert Martinez - robertcamilo23@gmail.com
  */
-@XmlRootElement ( name = "Person" )
-@XmlAccessorType ( XmlAccessType.FIELD )
-@XmlType ( name = "" )
-@Entity
-public class Person
+public class PersonRepresentation
 {
 	// ----------------------------
 	// Constructor
 	// ----------------------------
 
-	public Person( )
+	public PersonRepresentation( )
 	{
 		super( );
 	}
@@ -35,7 +23,7 @@ public class Person
 	private Integer id;
 	private String firstName;
 	private String lastName;
-	private Date birthday;
+	private String birthday;
 	private String genre;
 
 	// ----------------------------
@@ -72,12 +60,12 @@ public class Person
 		this.lastName = lastName;
 	}
 
-	public Date getBirthday( )
+	public String getBirthday( )
 	{
 		return birthday;
 	}
 
-	public void setBirthday( Date birthday )
+	public void setBirthday( String birthday )
 	{
 		this.birthday = birthday;
 	}

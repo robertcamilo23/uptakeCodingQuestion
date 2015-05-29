@@ -2,6 +2,7 @@ package UptakeCodingQuestion.interfaces;
 
 import UptakeCodingQuestion.domain.Family;
 import UptakeCodingQuestion.domain.Person;
+import UptakeCodingQuestion.representation.PersonRepresentation;
 
 import javax.jws.WebService;
 
@@ -27,7 +28,7 @@ public interface FamilyCRUDInterface
     public void deleteFamily( Integer familyId );
 
     // People table
-    public void createPerson( Person person );
+    public void createPerson( PersonRepresentation personRepresentation );
 
     public Person readPerson( Integer personId );
 

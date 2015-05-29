@@ -10,7 +10,7 @@
         </id>
         <property name="firstName" type="java.lang.String" column="first_name"/>
         <property name="lastName" type="java.lang.String" column="last_name"/>
-        <property name="birthday" type="timestamp" column="birthday"/>
-        <property name="genre" type="java.lang.Boolean" column="genre"/>
+        <property name="birthday" type="date" column="birthday"/>
+        <property name="genre" type="java.lang.String" column="genre"/>
     </class>
 </hibernate-mapping>
