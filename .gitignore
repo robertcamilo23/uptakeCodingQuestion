@@ -27,3 +27,7 @@ local.properties
 # Emacs files
 *~
 \#*\#
+
+test.log
+test.properties
+test.script
