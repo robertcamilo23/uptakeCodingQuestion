@@ -1,9 +1,11 @@
 package UptakeCodingQuestion.domain;
 
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 import java.util.List;
 
 /**
@@ -16,6 +18,7 @@ import java.util.List;
 @XmlRootElement( name = "Family" )
 @XmlAccessorType( XmlAccessType.FIELD )
 @XmlType( name = "" )
+@Entity
 public class Family
 {
     // ----------------------------

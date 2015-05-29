@@ -4,29 +4,30 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory>
+	<session-factory>
 
-        <!-- Database connection settings -->
-        <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<!-- Database connection settings -->
+		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
 
-        <!-- Local Database-->
-        <property name="hibernate.connection.url">jdbc:hsqldb:hsql://localhost</property>
-        <property name="connection.username">sa</property>
-        <property name="connection.password"></property>
+		<!-- Local Database -->
+		<property name="hibernate.connection.url">jdbc:hsqldb:hsql://localhost</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password"></property>
 
-        <!-- SQL dialect - generate SQL for a particular database -->
-        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+		<!-- SQL dialect - generate SQL for a particular database -->
+		<property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
 
-        <!-- Echo all executed SQL statements -->
-        <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
+		<!-- Echo all executed SQL statements -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
 
-        <!-- Enable Hibernate's automatic session context management -->
-        <property name="current_session_context_class">thread</property>
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
 
-        <!-- Mapping resource configuration files -->
-        <mapping resource="Family.hbm.xml"/>
-        <mapping resource="People.hbm.xml"/>
+		<!-- Mapping resource configuration files -->
+		<mapping resource="Family.hbm.xml" />
+		<mapping resource="People.hbm.xml" />
 
-    </session-factory>
+	</session-factory>
 </hibernate-configuration>
