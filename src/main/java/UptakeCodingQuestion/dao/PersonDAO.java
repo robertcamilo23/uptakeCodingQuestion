@@ -36,7 +36,7 @@ public class PersonDAO extends SessionManager implements FamilyDAOInterface< Per
 
     public List< Person > findAll( )
     {
-        return ( List< Person > ) getCurrentSession( ).createQuery( "from People" ).list( );
+        return ( List< Person > ) getCurrentSession( ).createQuery( "from Person" ).list( );
     }
 
     public void deleteAll( )

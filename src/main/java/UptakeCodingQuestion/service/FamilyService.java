@@ -1,5 +1,7 @@
 package UptakeCodingQuestion.service;
 
+import java.util.List;
+
 import UptakeCodingQuestion.dao.FamilyDAO;
 import UptakeCodingQuestion.dao.PersonDAO;
 import UptakeCodingQuestion.domain.Family;
@@ -13,91 +15,104 @@ import javax.ws.rs.Produces;
 
 /**
  * FamilyService.java
- *
+ * 
  * @author:
- *
- * Robert Martinez - robertcamilo23@gmail.com
+ * 
+ *          Robert Martinez - robertcamilo23@gmail.com
  */
-@Path( "/familyService/" )
+@Path ( "/familyService/" )
 public class FamilyService implements FamilyCRUDInterface
 {
-    // DAOs
-    private FamilyDAO familyDAO = new FamilyDAO( );
-    private PersonDAO personDAO = new PersonDAO( );
+	// DAOs
+	private FamilyDAO familyDAO = new FamilyDAO( );
+	private PersonDAO personDAO = new PersonDAO( );
 
-    // Families
-    public void createFamily( Family family )
-    {
-        familyDAO.openCurrentSessionWithTransaction( );
-        familyDAO.persist( family );
-        familyDAO.closeCurrentSessionWithTransaction( );
-    }
+	// Families
+	public void createFamily( Family family )
+	{
+		familyDAO.openCurrentSessionWithTransaction( );
+		familyDAO.persist( family );
+		familyDAO.closeCurrentSessionWithTransaction( );
+	}
 
-    @GET
-    @Produces( { "application/xml", "application/json" } )
-    @Path( "/families/{familyId}" )
-    public Family readFamily( @PathParam( "familyId" ) Integer familyId )
-    {
-        familyDAO.openCurrentSession( );
-        Family family = familyDAO.findById( familyId );
-        familyDAO.closeCurrentSession( );
-        return family;
-    }
+	@GET
+	@Produces ( { "application/xml", "application/json" } )
+	@Path ( "/families" )
+	public List< Family > readFamilies( )
+	{
+		familyDAO.openCurrentSession( );
+		List< Family > family = familyDAO.findAll( );
+		familyDAO.closeCurrentSession( );
+		return family;
+	}
 
-    public void updateFamily( Family family )
-    {
-        familyDAO.openCurrentSessionWithTransaction( );
-        familyDAO.update( family );
-        familyDAO.closeCurrentSessionWithTransaction( );
-    }
+	@GET
+	@Produces (
+	{ "application/xml", "application/json" } )
+	@Path ( "/families/{familyId}" )
+	public Family readFamily( @PathParam ( "familyId" ) Integer familyId )
+	{
+		familyDAO.openCurrentSession( );
+		Family family = familyDAO.findById( familyId );
+		familyDAO.closeCurrentSession( );
+		return family;
+	}
 
-    public void deleteFamily( Family family )
-    {
-        familyDAO.openCurrentSessionWithTransaction( );
-        familyDAO.delete( family );
-        familyDAO.closeCurrentSessionWithTransaction( );
-    }
+	public void updateFamily( Family family )
+	{
+		familyDAO.openCurrentSessionWithTransaction( );
+		familyDAO.update( family );
+		familyDAO.closeCurrentSessionWithTransaction( );
+	}
 
-    public void deleteFamily( Integer familyId )
-    {
-        deleteFamily( readFamily( familyId ) );
-    }
+	public void deleteFamily( Family family )
+	{
+		familyDAO.openCurrentSessionWithTransaction( );
+		familyDAO.delete( family );
+		familyDAO.closeCurrentSessionWithTransaction( );
+	}
 
-    // People
-    public void createPerson( Person person )
-    {
-        personDAO.openCurrentSessionWithTransaction( );
-        personDAO.persist( person );
-        personDAO.closeCurrentSessionWithTransaction( );
-    }
+	public void deleteFamily( Integer familyId )
+	{
+		deleteFamily( readFamily( familyId ) );
+	}
 
-    @GET
-    @Produces( { "application/xml", "application/json" } )
-    @Path( "/people/{personId}" )
-    public Person readPerson( @PathParam( "personId" ) Integer personId )
-    {
-        personDAO.openCurrentSession( );
-        Person person = personDAO.findById( personId );
-        personDAO.closeCurrentSession( );
-        return person;
-    }
+	// People
+	public void createPerson( Person person )
+	{
+		personDAO.openCurrentSessionWithTransaction( );
+		personDAO.persist( person );
+		personDAO.closeCurrentSessionWithTransaction( );
+	}
 
-    public void updatePerson( Person person )
-    {
-        personDAO.openCurrentSessionWithTransaction( );
-        personDAO.update( person );
-        personDAO.closeCurrentSessionWithTransaction( );
-    }
+	@GET
+	@Produces (
+	{ "application/xml", "application/json" } )
+	@Path ( "/people/{personId}" )
+	public Person readPerson( @PathParam ( "personId" ) Integer personId )
+	{
+		personDAO.openCurrentSession( );
+		Person person = personDAO.findById( personId );
+		personDAO.closeCurrentSession( );
+		return person;
+	}
 
-    public void deletePerson( Person person )
-    {
-        personDAO.openCurrentSessionWithTransaction( );
-        personDAO.delete( person );
-        personDAO.closeCurrentSessionWithTransaction( );
-    }
+	public void updatePerson( Person person )
+	{
+		personDAO.openCurrentSessionWithTransaction( );
+		personDAO.update( person );
+		personDAO.closeCurrentSessionWithTransaction( );
+	}
 
-    public void deletePerson( Integer personId )
-    {
-        deletePerson( readPerson( personId ) );
-    }
+	public void deletePerson( Person person )
+	{
+		personDAO.openCurrentSessionWithTransaction( );
+		personDAO.delete( person );
+		personDAO.closeCurrentSessionWithTransaction( );
+	}
+
+	public void deletePerson( Integer personId )
+	{
+		deletePerson( readPerson( personId ) );
+	}
 }

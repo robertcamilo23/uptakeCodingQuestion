@@ -25,3 +25,6 @@ are located in the "resources" folder.
 
 * Spring Version:    4.1.6
 * Hibernate version: 4.3.8
+
+
+http://stackoverflow.com/questions/6210757/java-lang-classnotfoundexception-org-springframework-web-context-contextloaderl
