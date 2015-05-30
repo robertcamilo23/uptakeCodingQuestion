@@ -18,4 +18,8 @@
 	<bean id="person" class="UptakeCodingQuestion.domain.Person"
 		scope="prototype" />
 
+	<bean id="personRepresentation"
+		class="UptakeCodingQuestion.representation.PersonRepresentation"
+		scope="prototype" />
+
 </beans>

@@ -35,9 +35,9 @@ public interface FamilyCRUDInterface
 
     public List< Person > readPeople( );
 
-    public void updatePerson( Person person );
+    public void updatePerson( PersonRepresentation personRepresentation );
 
-    public void deletePerson( Person person );
+    public void deletePerson( PersonRepresentation personRepresentation );
 
     public void deletePerson( Integer personId );
 }
