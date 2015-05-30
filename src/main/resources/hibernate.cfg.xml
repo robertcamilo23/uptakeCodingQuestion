@@ -10,7 +10,7 @@
 		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
 
 		<!-- Local Database -->
-		<property name="hibernate.connection.url">jdbc:hsqldb:file:familiesDB</property>
+		<property name="hibernate.connection.url">jdbc:hsqldb:mem:familiesDB</property>
 		<property name="connection.username">sa</property>
 		<property name="connection.password"></property>
 		
