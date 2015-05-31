@@ -1,0 +1,35 @@
+#registerTest {
+    background-color: #eee;
+    margin: 10px;
+    padding: 2px;
+    width: 280px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #3699c4;
+    /*display: none;*/
+}
+
+.lista {
+    font-family: 'Bangers', cursive;
+    list-style: none;
+}
+
+.lista li {
+    width: 200px;
+}
+
+.lista li input {
+    padding: 4px;
+}
+
+.lista li input[type=submit] {
+    background-color: #3699c4;
+    color: #fff;
+    border-radius: 4px;
+    font-family: 'Bangers', cursive;
+    font-size: 20px;
+}
+
+a {
+    font-family: 'Bangers', cursive;
+}

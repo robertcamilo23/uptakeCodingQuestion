@@ -6,10 +6,14 @@ import UptakeCodingQuestion.domain.Family;
 import UptakeCodingQuestion.domain.Person;
 import UptakeCodingQuestion.interfaces.FamilyCRUDInterface;
 import UptakeCodingQuestion.representation.PersonRepresentation;
+
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -19,6 +23,7 @@ import java.util.List;
  * 
  * @author: Robert Martinez - robertcamilo23@gmail.com
  */
+@CrossOriginResourceSharing ( allowAllOrigins = true )
 @Path ( "/familyService/" )
 public class FamilyService implements FamilyCRUDInterface
 {
@@ -38,7 +43,7 @@ public class FamilyService implements FamilyCRUDInterface
 	}
 
 	@GET
-	@Produces ( { "application/xml", "application/json" } )
+	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/families" )
 	public List< Family > readFamilies( )
 	{
@@ -49,7 +54,7 @@ public class FamilyService implements FamilyCRUDInterface
 	}
 
 	@GET
-	@Produces ( { "application/xml", "application/json" } )
+	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/families/{familyId}" )
 	public Family readFamily( @PathParam ( "familyId" ) Integer familyId )
 	{
@@ -81,7 +86,7 @@ public class FamilyService implements FamilyCRUDInterface
 	// People
 
 	@POST
-	@Produces ( { "application/xml", "application/json" } )
+	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/people" )
 	public void createPerson( PersonRepresentation personRepresentation )
 	{
@@ -95,7 +100,7 @@ public class FamilyService implements FamilyCRUDInterface
 	}
 
 	@GET
-	@Produces ( { "application/xml", "application/json" } )
+	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/people" )
 	public List< Person > readPeople( )
 	{
@@ -106,7 +111,7 @@ public class FamilyService implements FamilyCRUDInterface
 	}
 
 	@GET
-	@Produces ( { "application/xml", "application/json" } )
+	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/people/{personId}" )
 	public Person readPerson( @PathParam ( "personId" ) Integer personId )
 	{
@@ -117,7 +122,7 @@ public class FamilyService implements FamilyCRUDInterface
 	}
 
 	@PUT
-	@Produces ( { "application/xml", "application/json" } )
+	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/people" )
 	public void updatePerson( PersonRepresentation personRepresentation )
 	{
@@ -131,7 +136,7 @@ public class FamilyService implements FamilyCRUDInterface
 	}
 
 	@DELETE
-	@Produces ( { "application/xml", "application/json" } )
+	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/people" )
 	public void deletePerson( PersonRepresentation personRepresentation )
 	{
@@ -145,7 +150,7 @@ public class FamilyService implements FamilyCRUDInterface
 	}
 
 	@DELETE
-	@Produces ( { "application/xml", "application/json" } )
+	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/people/{personId}" )
 	public void deletePerson( @PathParam ( "personId" ) Integer personId )
 	{

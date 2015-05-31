@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Bangers' type='text/css'>
+    <link rel="stylesheet" href="index.css">
+    
+    <head>
+        <title>Register person</title>
+    </head>
+    
+    <body>
+        
+        <!-- <a href="javascript: showForm(); ">Show Form</a> -->
+        
+        <form action="" method="post" id="registerTest">        	 
+            <ul class="lista">
+            <label>Person input</label><br><br>
+                <li>
+                    <label>First Name</label>
+                    <input type="text" name="firstName">
+                </li>
+                <li>
+                    <label>Last Name</label>
+                    <input type="text" name="lastName">
+                </li>
+                <li>
+                    <label>Birthday</label>
+                    <input type="date" name="birthday">
+                </li>
+                <li>
+                    <label>Genre</label></li><br>
+                    Male: <input type="radio" name="genre" value="Male" />
+                    Female: <input type="radio" name="genre" value="Female" />
+                </li>
+                <li>
+                    <input type="submit" name="register" value="Register me!">
+                </li>
+            </ul>
+        </form>
+
+        <h2>JSON</h2>
+		<pre id="result">
+		</pre>
+        
+        <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery/2.1.1/jquery.js"></script>
+        <script type="text/javascript">
+            
+            function showForm()
+            {
+                var registerForm = $('#registerTest');
+                if(!registerForm.is(':visible'))
+                {
+                    return registerForm.slideDown(1000);
+                }
+                else 
+                {
+                    return registerForm.slideUp(1000);
+                }
+            }
+
+            $.fn.serializeObject = function() {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function() {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            };
+
+            $(function() {
+                $('form').submit(function() {
+                	var json = JSON.stringify($('form').serializeObject());
+                    $('#result').text(json);
+                    $.ajax({
+	                	headers: {
+	                		'Accept': 'application/json',
+	                		'Content-Type': "application/json",
+	            		},	            		
+					  	type: 'POST',
+					  	crossDomain: true,
+					  	contentType: 'application/json',
+					  	dataType: 'JSON',
+
+					  	data: json,
+					  	url: 'http://localhost:8081/familyService/people'
+					  	
+					});
+                    return false;
+                });
+            });
+            
+        </script>
+        
+    </body>
+</html>
