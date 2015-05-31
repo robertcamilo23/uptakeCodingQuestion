@@ -1,102 +1,108 @@
 <!DOCTYPE html>
+
 <html>
-    
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Bangers' type='text/css'>
-    <link rel="stylesheet" href="index.css">
-    
-    <head>
-        <title>Register person</title>
-    </head>
-    
-    <body>
-        
-        <!-- <a href="javascript: showForm(); ">Show Form</a> -->
-        
-        <form action="" method="post" id="registerTest">        	 
-            <ul class="lista">
-            <label>Person input</label><br><br>
-                <li>
-                    <label>First Name</label>
-                    <input type="text" name="firstName">
-                </li>
-                <li>
-                    <label>Last Name</label>
-                    <input type="text" name="lastName">
-                </li>
-                <li>
-                    <label>Birthday</label>
-                    <input type="date" name="birthday">
-                </li>
-                <li>
-                    <label>Genre</label></li><br>
-                    Male: <input type="radio" name="genre" value="Male" />
-                    Female: <input type="radio" name="genre" value="Female" />
-                </li>
-                <li>
-                    <input type="submit" name="register" value="Register me!">
-                </li>
-            </ul>
-        </form>
 
-        <h2>JSON</h2>
-		<pre id="result">
-		</pre>
-        
-        <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery/2.1.1/jquery.js"></script>
-        <script type="text/javascript">
-            
-            function showForm()
-            {
-                var registerForm = $('#registerTest');
-                if(!registerForm.is(':visible'))
-                {
-                    return registerForm.slideDown(1000);
-                }
-                else 
-                {
-                    return registerForm.slideUp(1000);
-                }
-            }
+<head>
+<title>Register person</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
 
-            $.fn.serializeObject = function() {
-                var o = {};
-                var a = this.serializeArray();
-                $.each(a, function() {
-                    if (o[this.name] !== undefined) {
-                        if (!o[this.name].push) {
-                            o[this.name] = [o[this.name]];
-                        }
-                        o[this.name].push(this.value || '');
-                    } else {
-                        o[this.name] = this.value || '';
-                    }
-                });
-                return o;
-            };
+<body>
 
-            $(function() {
-                $('form').submit(function() {
-                	var json = JSON.stringify($('form').serializeObject());
-                    $('#result').text(json);
-                    $.ajax({
-	                	headers: {
-	                		'Accept': 'application/json',
-	                		'Content-Type': "application/json",
-	            		},	            		
-					  	type: 'POST',
-					  	crossDomain: true,
-					  	contentType: 'application/json',
-					  	dataType: 'JSON',
+	<div class="container">
+		<h2>Register People</h2>
+		<form role="form">
+			<div class="form-group">
+				<label for="firstName">First Name:</label> <input type="text"
+					class="form-control" id="firstName" placeholder="Enter first name"
+					name="firstName">
+			</div>
 
-					  	data: json,
-					  	url: 'http://localhost:8081/familyService/people'
-					  	
-					});
-                    return false;
-                });
-            });
-            
-        </script>
-        
-    </body>
+			<div class="form-group">
+				<label for="lastName">Last Name:</label> <input type="text"
+					class="form-control" id="lastName" placeholder="Enter last name"
+					name="lastName">
+			</div>
+
+			<div class="form-group">
+				<label for="birthday">Birthday:</label> <input type="date"
+					class="form-control" id="birthday" name="birthday">
+			</div>
+
+			<div class="form-group">
+				<label for="genre">Genre:</label>
+				<div class="radio-inline">
+					<label><input type="radio" name="genre" value="Male">Male</label>
+				</div>
+				<div class="radio-inline">
+					<label><input type="radio" name="genre" value="Female">Female</label>
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-default">Register!</button>
+		</form>
+	</div>
+
+	<h2>JSON</h2>
+	<pre id="result"></pre>
+
+</body>
+
+<script type="text/javascript"
+	src="http://cdn.jsdelivr.net/jquery/2.1.1/jquery.js"></script>
+<script type="text/javascript">
+	function showForm() {
+		var registerForm = $('#registerTest');
+		if (!registerForm.is(':visible')) {
+			return registerForm.slideDown(1000);
+		} else {
+			return registerForm.slideUp(1000);
+		}
+	}
+
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+
+	$(function() {
+		$('form').submit(function() {
+			var json = JSON.stringify($('form').serializeObject());
+			$('#result').text(json);
+			$.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : "application/json",
+				},
+				type : 'POST',
+				crossDomain : true,
+				contentType : 'application/json',
+				dataType : 'JSON',
+
+				data : json,
+				url : 'http://localhost:8081/familyService/people'
+
+			});
+			return false;
+		});
+	});
+</script>
 </html>
