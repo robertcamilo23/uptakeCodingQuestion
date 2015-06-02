@@ -50,12 +50,67 @@
 	</nav>
 
 	<div class="container">
-		Home
+		<div class="table-responsive">
+			<h2>People registered</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>First name</th>
+						<th>Last name</th>
+						<th>Birthday</th>
+						<th>Genre</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 </body>
 
 <script type="text/javascript">
-
+	$(document).ready(function() {
+		
+		$.getJSON("http://localhost:8081/familyService/people", function(json) {
+			var tr;
+			for (var i = 0; i < json.length; i++) {
+				tr = $('<tr/>');
+				tr.append("<td>" + json[i].id + "</td>");
+				tr.append("<td>" + json[i].firstName + "</td>");
+				tr.append("<td>" + json[i].lastName + "</td>");
+				tr.append("<td>" + json[i].birthday + "</td>");
+				tr.append("<td>" + json[i].genre + "</td>");
+				tr.append("<td><a class=\"btn btn-primary edit\" href= http://localhost:8080/uptakeCodingQuestion/editPerson.html?id=" + json[i].id + ">EDIT</a></td>");
+				tr.append("<td><button class=\"btn btn-danger delete\" id=\"" + json[i].id + "\">DELETE</a></td>");
+				$('table').append(tr);
+			}
+			
+			$("button.delete").click(function () {
+			    var ID = $(this).attr('id');
+			    var dataString = '_method=DELETE';
+			    var location = "http://localhost:8081/familyService/people/" + ID;
+			    $.ajax({
+					headers : {
+						'Accept' : 'application/json',
+						'Content-Type' : "application/json",
+					},
+					type : 'DELETE',
+					crossDomain : true,
+					url : location,
+					context: this,
+			        success: function (html) {
+			            $(this).closest('tr').remove();
+			        }
+				});
+			});
+			
+		});
+		
+	});
+	
 </script>
 </html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Add people - Robert Martinez</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<!-- <script -->
+<script src="http://code.jquery.com/jquery.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Uptake REST</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Home</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">People <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="addPerson.html">Add people</a></li>
+							<li><a href="listPeople.html">List people</a></li>
+						</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">Families <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Add family</a></li>
+							<li><a href="#">Read family</a></li>
+							<li><a href="#">Edit family</a></li>
+							<li><a href="#">Delete family</a></li>
+							<li><a href="#">List families</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div data-toggle="validator" class="container">
+		<h2>Add people</h2>
+		<form role="form">
+			<div class="form-group">
+				<label for="firstName">First Name:</label> <input type="text"
+					class="form-control" id="firstName" placeholder="Enter first name"
+					name="firstName" required>
+			</div>
+
+			<div class="form-group">
+				<label for="lastName">Last Name:</label> <input type="text"
+					class="form-control" id="lastName" placeholder="Enter last name"
+					name="lastName" required>
+			</div>
+
+			<div class="form-group">
+				<label for="birthday">Birthday:</label> <input type="date"
+					class="form-control" id="birthday" name="birthday" required>
+			</div>
+
+			<div class="form-group">
+				<label for="genre">Genre:</label>
+				<div class="radio-inline">
+					<label><input type="radio" name="genre" value="Male"
+						required>Male</label>
+				</div>
+				<div class="radio-inline">
+					<label><input type="radio" name="genre" value="Female"
+						required>Female</label>
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-default">Register!</button>
+		</form>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+
+	$(function() {
+		$('form').submit(function() {
+			var json = JSON.stringify($('form').serializeObject());
+			$.ajax({
+				headers : {
+					'Accept' : 'application/json',
+					'Content-Type' : "application/json",
+				},
+				type : 'POST',
+				crossDomain : true,
+				contentType : 'application/json',
+				dataType : 'JSON',
+
+				data : json,
+				url : 'http://localhost:8081/familyService/people',
+				
+				success: function(result) {
+			    	window.location='http://localhost:8080/uptakeCodingQuestion/listPeople.html'
+			    }
+
+			});
+			return false;
+		});
+	});
+</script>
+</html>
