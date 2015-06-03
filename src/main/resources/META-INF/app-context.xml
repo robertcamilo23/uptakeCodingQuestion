@@ -11,7 +11,7 @@
 
 	<bean id="family" class="UptakeCodingQuestion.domain.Family">
 		<property name="people">
-			<list></list>
+			<set></set>
 		</property>
 	</bean>
 
@@ -20,6 +20,10 @@
 
 	<bean id="personRepresentation"
 		class="UptakeCodingQuestion.representation.PersonRepresentation"
+		scope="prototype" />
+
+	<bean id="familyRepresentation"
+		class="UptakeCodingQuestion.representation.FamilyRepresentation"
 		scope="prototype" />
 
 </beans>

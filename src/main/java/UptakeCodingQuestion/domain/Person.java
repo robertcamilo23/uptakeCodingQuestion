@@ -1,10 +1,6 @@
 package UptakeCodingQuestion.domain;
 
 import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 import java.util.Date;
 
@@ -13,9 +9,6 @@ import java.util.Date;
  * 
  * @author: Robert Martinez - robertcamilo23@gmail.com
  */
-@XmlRootElement ( name = "Person" )
-@XmlAccessorType ( XmlAccessType.FIELD )
-@XmlType ( name = "" )
 @Entity
 public class Person
 {
@@ -37,10 +30,21 @@ public class Person
 	private String lastName;
 	private Date birthday;
 	private String genre;
+//	private Family family;
 
 	// ----------------------------
 	// Getters & Setters
 	// ----------------------------
+
+//	public Family getFamily( )
+//	{
+//		return family;
+//	}
+//
+//	public void setFamily( Family family )
+//	{
+//		this.family = family;
+//	}
 
 	public Integer getId( )
 	{
@@ -91,4 +95,18 @@ public class Person
 	{
 		this.genre = genre;
 	}
+	
+	@Override
+    public String toString( )
+    {
+        StringBuilder sb = new StringBuilder( )            
+        .append( this.getClass( ).getName( ) )
+        .append( " Person { ")
+        .append( "id:" ).append( this.id ).append(',')
+        .append( "firstName:" ).append( this.firstName ).append(',')
+        .append( "birthday:" ).append( this.birthday ).append(',')
+        .append( "genre:" ).append( this.genre ).append(',')
+        .append( " }" );
+        return sb.toString( );
+    }
 }

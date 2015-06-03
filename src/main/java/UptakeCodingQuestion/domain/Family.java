@@ -1,21 +1,14 @@
 package UptakeCodingQuestion.domain;
 
 import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Family.java
  * 
  * @author: Robert Martinez - robertcamilo23@gmail.com
  */
-@XmlRootElement ( name = "Family" )
-@XmlAccessorType ( XmlAccessType.FIELD )
-@XmlType ( name = "" )
 @Entity
 public class Family
 {
@@ -34,7 +27,7 @@ public class Family
 	// ----------------------------
 
 	private Integer id;
-	private List< Person > people;
+	private Set< Person > people;
 
 	// ----------------------------
 	// Getters & Setters
@@ -50,13 +43,25 @@ public class Family
 		this.id = id;
 	}
 
-	public List< Person > getPeople( )
+	public Set< Person > getPeople( )
 	{
 		return people;
 	}
 
-	public void setPeople( List< Person > people )
+	public void setPeople( Set< Person > people )
 	{
 		this.people = people;
 	}
+
+	@Override
+    public String toString( )
+    {
+        StringBuilder sb = new StringBuilder( )            
+        .append( this.getClass( ).getName( ) )
+        .append( " Family { ")
+        .append( "id:" ).append( this.id ).append(',')
+        .append( "set<person>:" ).append( this.people ).append(',')
+        .append( " }" );
+        return sb.toString( );
+    }
 }

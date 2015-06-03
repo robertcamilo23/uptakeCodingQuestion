@@ -8,6 +8,9 @@
         <id name="id" column="id">
             <generator class="native"/>
         </id>
+<!--         <many-to-one name="family" class="UptakeCodingQuestion.domain.Family" fetch="select"> -->
+<!--             <column name="family_id" not-null="false" /> -->
+<!--         </many-to-one> -->
         <property name="firstName" type="java.lang.String" column="first_name"/>
         <property name="lastName" type="java.lang.String" column="last_name"/>
         <property name="birthday" type="date" column="birthday"/>

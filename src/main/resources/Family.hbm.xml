@@ -4,14 +4,16 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="UptakeCodingQuestion.domain">
-    <class name="Family" table="Families">
-        <id name="id" column="id">
-            <generator class="native"/>
-        </id>
-        <list name="people" cascade="all-delete-orphan">
-            <key column="Families_id" foreign-key="UptakeCodingQuestion.domain.Family" not-null="true"/>
-            <list-index column="idx"/>
-            <one-to-many class="UptakeCodingQuestion.domain.Person"/>
-        </list>
-    </class>
+	<class name="Family" table="Families">
+		<id name="id" column="family_id">
+			<generator class="native" />
+		</id>
+		<set name="people" table="FamilyXPeople" inverse="false" lazy="true"
+			fetch="select" cascade="all">
+			<key>
+				<column name="family_id" not-null="false" />
+			</key>
+			<one-to-many class="UptakeCodingQuestion.domain.Person" />
+		</set>
+	</class>
 </hibernate-mapping>

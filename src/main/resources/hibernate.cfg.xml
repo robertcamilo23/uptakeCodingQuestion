@@ -29,7 +29,7 @@
 		<property name="current_session_context_class">thread</property>
 
 		<!-- Mapping resource configuration files -->
-<!-- 		<mapping resource="Family.hbm.xml" /> -->
+		<mapping resource="Family.hbm.xml" />
 		<mapping resource="People.hbm.xml" />
 
 	</session-factory>

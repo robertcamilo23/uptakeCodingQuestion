@@ -5,6 +5,7 @@ import UptakeCodingQuestion.dao.PersonDAO;
 import UptakeCodingQuestion.domain.Family;
 import UptakeCodingQuestion.domain.Person;
 import UptakeCodingQuestion.interfaces.FamilyCRUDInterface;
+import UptakeCodingQuestion.representation.FamilyRepresentation;
 import UptakeCodingQuestion.representation.PersonRepresentation;
 
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
@@ -16,7 +17,10 @@ import javax.ws.rs.core.MediaType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * FamilyService.java
@@ -35,11 +39,18 @@ public class FamilyService implements FamilyCRUDInterface
 	private PersonDAO personDAO = new PersonDAO( );
 
 	// Families
-	public void createFamily( Family family )
+	@POST
+	@Produces ( { MediaType.APPLICATION_JSON } )
+	@Path ( "/families" )
+	public void createFamily( FamilyRepresentation familyRepresentation )
 	{
-		familyDAO.openCurrentSessionWithTransaction( );
-		familyDAO.persist( family );
-		familyDAO.closeCurrentSessionWithTransaction( );
+		Family family = getFamilyFromRepresentation( familyRepresentation );
+		if ( family != null )
+		{
+			familyDAO.openCurrentSessionWithTransaction( );
+			familyDAO.persist( family );
+			familyDAO.closeCurrentSessionWithTransaction( );
+		}
 	}
 
 	@GET
@@ -48,9 +59,10 @@ public class FamilyService implements FamilyCRUDInterface
 	public List< Family > readFamilies( )
 	{
 		familyDAO.openCurrentSession( );
-		List< Family > family = familyDAO.findAll( );
+		List< Family > families = familyDAO.findAll( );
+		families.toString( );
 		familyDAO.closeCurrentSession( );
-		return family;
+		return families;
 	}
 
 	@GET
@@ -60,31 +72,48 @@ public class FamilyService implements FamilyCRUDInterface
 	{
 		familyDAO.openCurrentSession( );
 		Family family = familyDAO.findById( familyId );
+		family.toString( );
 		familyDAO.closeCurrentSession( );
 		return family;
 	}
 
-	public void updateFamily( Family family )
+	@PUT
+	@Produces ( { MediaType.APPLICATION_JSON } )
+	@Path ( "/families" )
+	public void updateFamily( FamilyRepresentation familyRepresentation )
 	{
-		familyDAO.openCurrentSessionWithTransaction( );
-		familyDAO.update( family );
-		familyDAO.closeCurrentSessionWithTransaction( );
+		Family family = getFamilyFromRepresentation( familyRepresentation );
+		if ( family != null && family.getId( ) != null )
+		{
+			familyDAO.openCurrentSessionWithTransaction( );
+			familyDAO.update( family );
+			familyDAO.closeCurrentSessionWithTransaction( );
+		}
 	}
 
-	public void deleteFamily( Family family )
+	@DELETE
+	@Produces ( { MediaType.APPLICATION_JSON } )
+	@Path ( "/families" )
+	public void deleteFamily( FamilyRepresentation familyRepresentation )
 	{
-		familyDAO.openCurrentSessionWithTransaction( );
-		familyDAO.delete( family );
-		familyDAO.closeCurrentSessionWithTransaction( );
+		Family family = getFamilyFromRepresentation( familyRepresentation );
+		if ( family != null && family.getId( ) != null )
+		{
+			familyDAO.openCurrentSessionWithTransaction( );
+			familyDAO.delete( family );
+			familyDAO.closeCurrentSessionWithTransaction( );
+		}
 	}
 
-	public void deleteFamily( Integer familyId )
+	@DELETE
+	@Produces ( { MediaType.APPLICATION_JSON } )
+	@Path ( "/families/{familyId}" )
+	public void deleteFamily( @PathParam ( "familyId" ) Integer familyId )
 	{
-		deleteFamily( readFamily( familyId ) );
+		deleteFamily( getRepresentationFromFamily( readFamily( familyId ) ) );
 	}
 
 	// People
-
 	@POST
 	@Produces ( { MediaType.APPLICATION_JSON } )
 	@Path ( "/people" )
@@ -189,5 +218,31 @@ public class FamilyService implements FamilyCRUDInterface
 		personRepresentation.setBirthday( simpleDateFormat.format( person.getBirthday( ) ) );
 		personRepresentation.setGenre( person.getGenre( ) );
 		return personRepresentation;
+	}
+
+	public Family getFamilyFromRepresentation( FamilyRepresentation familyRepresentation )
+	{
+		Family family = ( Family ) context.getBean( "family" );
+		family.setId( familyRepresentation.getId( ) );
+		Set< Person > people = new HashSet< Person >( );
+		for ( PersonRepresentation personRepresentation : familyRepresentation.getPeopleRepresentation( ) )
+		{
+			people.add( getPersonFromRepresentation( personRepresentation ) );
+		}
+		family.setPeople( people );
+		return family;
+	}
+	
+	public FamilyRepresentation getRepresentationFromFamily( Family family )
+	{
+		FamilyRepresentation familyRepresentation = ( FamilyRepresentation ) context.getBean( "familyRepresentation" );
+		familyRepresentation.setId( family.getId( ) );
+		List< PersonRepresentation > peopleRepresentation = new ArrayList< PersonRepresentation >( );
+		for ( Person person : family.getPeople( ) )
+		{
+			peopleRepresentation.add( getRepresentationFromPerson( person ) );
+		}
+		familyRepresentation.setPeopleRepresentation( peopleRepresentation );
+		return familyRepresentation;
 	}
 }

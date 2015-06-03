@@ -3,7 +3,7 @@
 <html>
 
 <head>
-<title>List of people - Robert Martinez</title>
+<title>List of families - Robert Martinez</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -48,15 +48,12 @@
 
 	<div class="container">
 		<div class="table-responsive">
-			<h2>People registered</h2>
+			<h2>Families registered</h2>
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>First name</th>
-						<th>Last name</th>
-						<th>Birthday</th>
-						<th>Genre</th>
+						<th>People</th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -72,16 +69,18 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		
-		$.getJSON("http://localhost:8081/familyService/people", function(json) {
+		$.getJSON("http://localhost:8081/familyService/families", function(json) {
 			var tr;
 			for (var i = 0; i < json.length; i++) {
 				tr = $('<tr/>');
 				tr.append("<td>" + json[i].id + "</td>");
-				tr.append("<td>" + json[i].firstName + "</td>");
-				tr.append("<td>" + json[i].lastName + "</td>");
-				tr.append("<td>" + json[i].birthday + "</td>");
-				tr.append("<td>" + json[i].genre + "</td>");
-				tr.append("<td><a class=\"btn btn-primary edit\" href= http://localhost:8080/uptakeCodingQuestion/editPerson.html?id=" + json[i].id + ">EDIT</a></td>");
+				var peopleNames = [];
+				for(var j = 0; j < json[i].people.length; j++)
+				{
+					peopleNames.push( ' ' + json[i].people[j].firstName + ' ' + json[i].people[j].lastName )
+				}
+				tr.append("<td>" + peopleNames + "</td>");
+				tr.append("<td><a class=\"btn btn-primary edit\" href= http://localhost:8080/uptakeCodingQuestion/editFamily.html?id=" + json[i].id + ">EDIT</a></td>");
 				tr.append("<td><button class=\"btn btn-danger delete\" id=\"" + json[i].id + "\">DELETE</a></td>");
 				$('table').append(tr);
 			}
@@ -89,7 +88,7 @@
 			$("button.delete").click(function () {
 			    var ID = $(this).attr('id');
 			    var dataString = '_method=DELETE';
-			    var location = "http://localhost:8081/familyService/people/" + ID;
+			    var location = "http://localhost:8081/familyService/families/" + ID;
 			    $.ajax({
 					headers : {
 						'Accept' : 'application/json',

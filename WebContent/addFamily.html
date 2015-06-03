@@ -3,7 +3,7 @@
 <html>
 
 <head>
-<title>Add people - Robert Martinez</title>
+<title>Add family - Robert Martinez</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -47,63 +47,72 @@
 	</nav>
 
 	<div data-toggle="validator" class="container">
-		<h2>Add people</h2>
+		<h2>Select the people you want to add to a family</h2>
 		<form role="form">
-			<div class="form-group">
-				<label for="firstName">First Name:</label> <input type="text"
-					class="form-control" id="firstName" placeholder="Enter first name"
-					name="firstName" required>
-			</div>
+			<select class="form-control" id="peopleRepresentation" name="peopleRepresentation" size=5 multiple>
+			</select>
 
-			<div class="form-group">
-				<label for="lastName">Last Name:</label> <input type="text"
-					class="form-control" id="lastName" placeholder="Enter last name"
-					name="lastName" required>
-			</div>
-
-			<div class="form-group">
-				<label for="birthday">Birthday:</label> <input type="date"
-					class="form-control" id="birthday" name="birthday" required>
-			</div>
-
-			<div class="form-group">
-				<label for="genre">Genre:</label>
-				<div class="radio-inline">
-					<label><input type="radio" name="genre" value="Male"
-						required>Male</label>
-				</div>
-				<div class="radio-inline">
-					<label><input type="radio" name="genre" value="Female"
-						required>Female</label>
-				</div>
-			</div>
-
-			<button type="submit" class="btn btn-default">Register!</button>
+			<button type="submit" class="btn btn-default">Register family!</button>
 		</form>
 	</div>
 
 </body>
 
 <script type="text/javascript">
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
+	$(document).ready(function() {
+		
+		var peopleId = [];
+		$.getJSON("http://localhost:8081/familyService/families", function(json) {
+			
+			for (var i = 0; i < json.length; i++) {
+				for(var j = 0; j < json[i].people.length; j++)
+				{
+					peopleId.push( json[i].people[j].id )
 				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
 			}
+			
+			console.log(peopleId)
+			
+			$.getJSON("http://localhost:8081/familyService/people", function(json) {
+				
+				var options = '';
+				
+				for (var i = 0; i < json.length; i++) {
+					if ($.inArray(json[i].id, peopleId) === -1) {
+						options += '<option value=' + JSON.stringify(json[i]) + '>' + json[i].firstName + ' ' + json[i].lastName + '</option>';
+					}
+				}
+				$('select').html(options);
+				
+			});
+			
 		});
-		return o;
-	};
+		
+	});
+	
+	function getSelectValues(select) {
+		  var result = [];
+		  var options = select && select.options;
+		  var opt;
+
+		  for (var i=0, iLen=options.length; i<iLen; i++) {
+		    opt = options[i];
+
+		    if (opt.selected) {
+		      result.push(opt.value);
+		    }
+		  }
+		  return result;
+	}
 
 	$(function() {
 		$('form').submit(function() {
-			var json = JSON.stringify($('form').serializeObject());
+			
+			var el = document.getElementsByTagName('select')[0];
+			var values = getSelectValues(el);
+			var json = '{"peopleRepresentation":[' + values +']}';
+			console.log(json);
+			
 			$.ajax({
 				headers : {
 					'Accept' : 'application/json',
@@ -115,11 +124,11 @@
 				dataType : 'JSON',
 
 				data : json,
-				url : 'http://localhost:8081/familyService/people',
+				url : 'http://localhost:8081/familyService/families',
 				
-// 				success: function(result) {
-// 			    	window.location='http://localhost:8080/uptakeCodingQuestion/listPeople.html'
-// 			    }
+				success: function(result) {
+			    	window.location='http://localhost:8080/uptakeCodingQuestion/listFamilies.html'
+			    }
 
 			});
 			return false;
