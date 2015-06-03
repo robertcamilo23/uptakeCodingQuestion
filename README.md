@@ -6,7 +6,7 @@ AUTHOR
 
 DESCRIPTION
 ------------------------------------------
-TODO
+![alt tag](https://raw.githubusercontent.com/robertcamilo23/uptakeCodingQuestion/master/uptakeCodingQuestion.png)
 
 
 NOTE
