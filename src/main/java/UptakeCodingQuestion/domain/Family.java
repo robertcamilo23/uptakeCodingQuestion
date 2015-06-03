@@ -60,7 +60,7 @@ public class Family
         .append( this.getClass( ).getName( ) )
         .append( " Family { ")
         .append( "id:" ).append( this.id ).append(',')
-        .append( "set<person>:" ).append( this.people ).append(',')
+        .append( "set<person>:" ).append( this.people )
         .append( " }" );
         return sb.toString( );
     }
