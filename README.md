@@ -6,9 +6,9 @@ AUTHOR
 
 DESCRIPTION
 ------------------------------------------
-A REST API was created to create, read, update, and delete "People", as well as they can be grouped into "Families". Please deploy the provided "war" that contains the whole project in a Tomcat server. You can follow this instructions to do it: http://www.codejava.net/servers/tomcat/how-to-deploy-a-java-web-application-on-tomcat.
+A REST API was created to create, read, update, and delete "People", as well as they can be grouped into "Families". Please deploy the provided "war" that contains the whole project in a Tomcat server. You can follow [this instructions](http://www.codejava.net/servers/tomcat/how-to-deploy-a-java-web-application-on-tomcat) to do it.
 
-Once the war is deployed, please use the front end client, going to this address: http://localhost:8080/uptakeCodingQuestion/index.html
+Once the war is deployed, please use the [front end client](http://localhost:8080/uptakeCodingQuestion/index.html), that is hosted in this address: http://localhost:8080/uptakeCodingQuestion/index.html
 
 ![alt tag](https://raw.githubusercontent.com/robertcamilo23/uptakeCodingQuestion/master/uptakeCodingQuestion.png)
 
