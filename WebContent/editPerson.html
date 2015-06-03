@@ -137,7 +137,6 @@
 		$('form').submit(function() {
 			var json = JSON.stringify($('form').serializeObject());
 			json = "{\"id\":" + urlId + "," + json.substring(1);
-			console.log(json);
 			$.ajax({
 				headers : {
 					'Accept' : 'application/json',

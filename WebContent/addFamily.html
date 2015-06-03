@@ -71,8 +71,6 @@
 				}
 			}
 			
-			console.log(peopleId)
-			
 			$.getJSON("http://localhost:8081/familyService/people", function(json) {
 				
 				var options = '';
@@ -111,7 +109,6 @@
 			var el = document.getElementsByTagName('select')[0];
 			var values = getSelectValues(el);
 			var json = '{"peopleRepresentation":[' + values +']}';
-			console.log(json);
 			
 			$.ajax({
 				headers : {
